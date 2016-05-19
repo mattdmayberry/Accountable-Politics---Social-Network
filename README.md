@@ -8,30 +8,30 @@ This assumes you're running OSX and already have [Homebrew](http://brew.sh/) ins
 	brew install python3
 	pip install invoke
 	xcode-select --install
-	git clone git@github.com:mattdmayberry/accountable.git
-	cd accountable
+	git clone git@github.com:mattdmayberry/accountable-politics.git
+	cd accountable_politics
 	pyvenv env
 	source env/bin/activate
 	invoke install
 
 This installs python3, the [invoke utility](https://github.com/pyinvoke/invoke), xcode, and clones the app repository. It also sets up a virtual environment for the app, and installs all the python dependencies into the virtual environment.	
 
-#### Dependencies
+### Dependencies
 
-  bcrypt==2.0.0
-  cffi==1.6.0
-  Flask==0.10.1
-  Flask-Bcrypt==0.7.1
-  Flask-Login==0.3.2
-  Flask-WTF==0.12
-  itsdangerous==0.24
-  Jinja2==2.8
-  MarkupSafe==0.23
-  peewee==2.8.1
-  pycparser==2.14
-  six==1.10.0
-  Werkzeug==0.11.9
-  WTForms==2.1
+	bcrypt==2.0.0
+	cffi==1.6.0
+	Flask==0.10.1
+	Flask-Bcrypt==0.7.1
+	Flask-Login==0.3.2
+	Flask-WTF==0.12
+	itsdangerous==0.24
+	Jinja2==2.8
+	MarkupSafe==0.23
+	peewee==2.8.1
+	pycparser==2.14
+	six==1.10.0
+	Werkzeug==0.11.9
+	WTForms==2.1
 
 ### Running Tests
 
