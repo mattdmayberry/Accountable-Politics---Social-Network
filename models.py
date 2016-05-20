@@ -25,7 +25,8 @@ class User(UserMixin, Model):
 
     def get_stream(self):
         return Post.select().where(
-            (Post.user == self)
+            (Post.user << self.following()) | # get the posts where the post author is inside of the people I follow
+            (Post.user == self) # get all of the current users authored posts
         )
 
     def following(self):
