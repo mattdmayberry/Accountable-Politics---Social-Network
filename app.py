@@ -1,7 +1,10 @@
+# accountable politics
+# app.py
+
 from flask import (Flask, g, render_template, flash, redirect, url_for)
 from flask.ext.bcrypt import check_password_hash
 from flask.ext.login import (LoginManager, login_user, logout_user,
-                             login_required)
+                             login_required, current_user)
 
 import forms
 import models
@@ -29,6 +32,7 @@ def load_user(userid):
 @app.before_request
 def before_request():
     """Connect to the database before each request."""
+    g.user = current_user
     g.db = models.DATABASE
     g.db.connect()
 
@@ -85,17 +89,71 @@ def logout():
 def post():
     form = forms.PostForm()
     if form.validate_on_submit():
-        models.Post.create(user=g.user._get_current_object(),
+        models.Post.create(user=g.user.id,
                            content=form.content.data.strip())
-        flash("Message posted!", "success")
+        flash("Message posted! Thanks!", "success")
         return redirect(url_for('index'))
     return render_template('post.html', form=form)
 
 
 @app.route('/')
 def index():
-    return 'Hey'
+    stream = models.Post.select().limit(100)
+    return render_template('stream.html', stream=stream)
 
+
+@app.route('/stream')
+@app.route('/stream/<username>')
+def stream(username=None):
+    template = 'stream.html'
+    if username and username != current_user.username:
+        user = models.User.select().where(models.User.username**username).get()
+        stream = user.posts.limit(100)
+    else:
+        stream = current_user.get_stream().limit(100)
+        user = current_user
+    if username:
+        template = 'user_stream.html'
+    return render_template(template, stream=stream, user=user)
+
+
+@app.route('/follow/<username>')
+@login_required
+def follow(username):
+    try:
+        to_user = models.User.get(models.User.username**username)
+    except models.DoesNotExist:
+        abort(404)
+    else:
+        try:
+            models.Relationship.create(
+                from_user=g.user._get_current_object(),
+                to_user=to_user
+            )
+        except models.IntegrityError:
+            pass
+        else:
+            flash("You're now following {}!".format(to_user.username), "success")
+    return redirect(url_for('stream', username=to_user.username))
+
+@app.route('/unfollow/<username>')
+@login_required
+def unfollow(username):
+    try:
+        to_user = models.User.get(models.User.username**username)
+    except models.DoesNotExist:
+        abort(404)
+    else:
+        try:
+            models.Relationship.get(
+                from_user=g.user._get_current_object(),
+                to_user=to_user
+            ).delete_instance()
+        except models.IntegrityError:
+            pass
+        else:
+            flash("You are no longer following {}!".format(to_user.username), "success")
+    return redirect(url_for('stream', username=to_user.username))
 
 if __name__ == '__main__':
     models.initialize()

@@ -12,6 +12,8 @@ body {
 a {
   text-decoration: none;
   color: #2C3238;
+  margin: 10px;
+  text-align: right;
 }
 a:hover {
   color: #000;
