@@ -24,17 +24,21 @@ This installs python3, the [invoke utility](https://github.com/pyinvoke/invoke),
 	Flask-Bcrypt==0.7.1
 	Flask-Login==0.3.2
 	Flask-WTF==0.12
+	gunicorn==19.5.0
+	heroku==0.1.4
 	itsdangerous==0.24
 	Jinja2==2.8
 	MarkupSafe==0.23
 	peewee==2.8.1
 	pycparser==2.14
+	python-dateutil==1.5
+	requests==2.10.0
 	six==1.10.0
 	Werkzeug==0.11.9
 	WTForms==2.1
 
 ### Running Tests
-
+!! NEED TO UPDATE THIS SECTION WITH TESTING INFO !!
 First, install PhantomJS (`brew install phantomjs`).
 
 Run `invoke test` from the project directory will run every test.
@@ -43,11 +47,7 @@ Run `invoke test` from the project directory will run every test.
 
 Run `invoke serve` from the project directory to run locally.
 
-This will run the project on [port 5000](http://localhost:5000/).
-
-### Running in debug mode
-
-Run `invoke serve_debug` to start the project in debug mode.
+This will run the project on [port 8000](http://localhost:8000/).
 
 ### Setting up PyCharm
 
