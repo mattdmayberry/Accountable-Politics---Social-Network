@@ -52,7 +52,7 @@ class User(UserMixin, Model):
     @classmethod
     def create_user(cls, username, email, password, admin=False):
         try:
-            with DATABASE.transaction():
+            with db_proxy.transaction():
                 cls.create(
                     username=username,
                     email=email,
@@ -81,7 +81,7 @@ class Relationship(Model):
     class Meta:
         database = db_proxy
         indexes = (
-            (('from_user', 'to_user'), True)
+            (('from_user', 'to_user'), True),  # Note the trailing comma!
         )
 
 # Import modules based on the environment.
