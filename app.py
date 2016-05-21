@@ -91,7 +91,7 @@ def post():
     if form.validate_on_submit():
         models.Post.create(user=g.user.id,
                            content=form.content.data.strip())
-        flash("Message posted! Thanks!", "success")
+        flash("Message posted!", "success")
         return redirect(url_for('index'))
     return render_template('post.html', form=form)
 
@@ -131,6 +131,14 @@ def view_post(post_id):
     return render_template('stream.html', stream=posts)
 
 
+@app.route('/delete_post/<int:post_id>')
+@login_required
+def delete_post(post_id):
+    post = models.Post.delete().where(models.Post.id == post_id).execute()
+    flash("This post has successfully been deleted.", "success")
+    return redirect(url_for('stream', stream = stream))
+
+
 @app.route('/follow/<username>')
 @login_required
 def follow(username):
@@ -149,6 +157,7 @@ def follow(username):
         else:
             flash("You're now following {}!".format(to_user.username), "success")
     return redirect(url_for('stream', username=to_user.username))
+
 
 @app.route('/unfollow/<username>')
 @login_required
@@ -178,8 +187,8 @@ if __name__ == '__main__':
     models.initialize()
     try:
         models.User.create_user(
-            username='mayberrm',
-            email='mayberrm@oregonstate.edu',
+            username='matt',
+            email='matt@example.com',
             password='password',
             admin=True
         )
