@@ -14,7 +14,7 @@ PORT = 8000
 HOST = '0.0.0.0'
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/[YOUR_DATABASE_NAME]'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://gippueqmxpmuod:EZvKXk8pj2PfjowMkZMZI00nxo@ec2-54-243-201-144.compute-1.amazonaws.com:5432/d5o5tqsssm54pd'
 db = SQLAlchemy(app)
 app.secret_key = 's_e_c_r_e_t___k_e_y!'
 
