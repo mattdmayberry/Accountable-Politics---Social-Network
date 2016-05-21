@@ -84,10 +84,7 @@ class Relationship(Model):
             (('from_user', 'to_user'), True),  # Note the trailing comma!
         )
 
-# Import modules based on the environment.
-# The HEROKU value first needs to be set on Heroku
-# either through the web front-end or through the command
-# line (if you have Heroku Toolbelt installed, type the following:
+
 # heroku config:set HEROKU=1).
 def initialize():
     if 'HEROKU' in os.environ:
