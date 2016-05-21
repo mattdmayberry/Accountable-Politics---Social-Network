@@ -5,7 +5,7 @@ from flask import (Flask, g, render_template, flash, redirect, url_for, abort)
 from flask.ext.bcrypt import check_password_hash
 from flask.ext.login import (LoginManager, login_user, logout_user,
                              login_required, current_user)
-
+from flask.ext.sqlalchemy import SQLAlchemy
 import forms
 import models
 
@@ -14,6 +14,8 @@ PORT = 8000
 HOST = '0.0.0.0'
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/[YOUR_DATABASE_NAME]'
+db = SQLAlchemy(app)
 app.secret_key = 's_e_c_r_e_t___k_e_y!'
 
 login_manager = LoginManager()
