@@ -10,7 +10,7 @@ import models
 
 
 DEBUG = True
-PORT = 8000
+PORT = 5000
 HOST = '0.0.0.0'
 
 app = Flask(__name__)
@@ -184,6 +184,8 @@ def not_found(error):
 
 
 if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
     models.initialize()
     try:
         models.User.create_user(
