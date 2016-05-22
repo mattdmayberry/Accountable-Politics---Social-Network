@@ -90,11 +90,12 @@ class Relationship(Model):
 # heroku config:set HEROKU=1).
 def initialize():
     if 'HEROKU' in os.environ:
-        urlparse.uses_netloc.append('postgres')
-        url = urlparse.urlparse(os.environ["DATABASE_URL"])
-        db = PostgresqlDatabase(database=url.path[1:], user=url.username, password=url.password, host=url.hostname,
-                                port=url.port)
-        db_proxy.initialize(db)
+        if 'postgres' not in urlparse.uses_netloc:
+            urlparse.uses_netloc.append('postgres')
+            url = urlparse.urlparse(os.environ["DATABASE_URL"])
+            db = PostgresqlDatabase(database=url.path[1:], user=url.username, password=url.password, host=url.hostname,
+                                    port=url.port)
+            db_proxy.initialize(db)
     else:
         db = SqliteDatabase('accountable.db')
         db_proxy.initialize(db)
