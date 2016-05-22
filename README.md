@@ -9,7 +9,7 @@ This assumes you're running OSX and already have [Homebrew](http://brew.sh/) ins
 	pip install invoke
 	xcode-select --install
 	git clone git@github.com:mattdmayberry/accountable.git
-	cd accountable_politics
+	cd accountable
 	pyvenv env
 	source env/bin/activate
 	invoke install
