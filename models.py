@@ -6,10 +6,22 @@ import os
 from flask.ext.bcrypt import generate_password_hash
 from flask.ext.login import UserMixin
 from peewee import *
+import urllib
 from urllib.parse import urlparse
 import psycopg2
 
 db_proxy = Proxy()
+
+# heroku config:set HEROKU=1).
+if 'HEROKU' in os.environ:
+    urllib.parse.uses_netloc.append('postgres')
+    url = urlparse(os.environ["DATABASE_URL"])
+    db = PostgresqlDatabase(database=url.path[1:], user=url.username, password=url.password, host=url.hostname, port=url.port)
+    db_proxy.initialize(db)
+else:
+    db = SqliteDatabase('accountable.db')
+    db_proxy.initialize(db)
+
 
 class User(UserMixin, Model):
     username = CharField(unique=True)
@@ -89,20 +101,8 @@ class Relationship(Model):
 
 # heroku config:set HEROKU=1).
 def initialize():
-    if 'HEROKU' in os.environ:
-        urlparse.uses_netloc.append('postgres')
-        url = urlparse.urlparse(os.environ["DATABASE_URL"])
-        db = PostgresqlDatabase(database=url.path[1:], user=url.username, password=url.password, host=url.hostname,
-                                port=url.port)
-        db_proxy.initialize(db)
-    else:
-        db = SqliteDatabase('accountable.db')
-        db_proxy.initialize(db)
-
     db_proxy.connect()
     db_proxy.create_tables([User, Post, Relationship], safe=True)
-    db_proxy.close()
-
 
 
 
