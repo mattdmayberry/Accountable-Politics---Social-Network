@@ -32,7 +32,7 @@ def load_user(userid):
 
 @app.before_request
 def before_request():
-    """Connect to the database before each request."""
+    """Specify the current user and connect to the database before each request."""
     g.user = current_user
     g.db = models.db_proxy
     g.db.connect()
