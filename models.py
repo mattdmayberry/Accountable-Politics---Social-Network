@@ -6,7 +6,8 @@ import os
 from flask.ext.bcrypt import generate_password_hash
 from flask.ext.login import UserMixin
 from peewee import *
-import urllib
+from urllib.parse import urlparse
+import psycopg2
 
 db_proxy = Proxy()
 
@@ -89,7 +90,6 @@ class Relationship(Model):
 # heroku config:set HEROKU=1).
 def initialize():
     if 'HEROKU' in os.environ:
-        import urlparse, psycopg2
         urlparse.uses_netloc.append('postgres')
         url = urlparse.urlparse(os.environ["DATABASE_URL"])
         db = PostgresqlDatabase(database=url.path[1:], user=url.username, password=url.password, host=url.hostname,
