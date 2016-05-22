@@ -76,7 +76,7 @@ class User(UserMixin, Model):
             raise ValueError("User already exists")
 
 class Post(Model):
-    timestamp = DateTimeField(default=datetime.datetime.now)
+    timestamp = DateTimeField(default=datetime.datetime.now())
     user = ForeignKeyField(
         rel_model=User,
         related_name='posts'
