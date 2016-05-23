@@ -7,35 +7,44 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="/static/css/normalize.min.css">
-        <link rel="stylesheet" href="/static/css/main.css">
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
         <!--[if lt IE 9]>
             <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
             <script>window.html5 || document.write('<script src="/static/js/vendor/html5shiv.js"><\/script>')</script>
         <![endif]-->
     </head>
     <body>
-        <header>
-          <div class="row">
-            <div class="grid-33">
-              <a href="{{ url_for('index') }}">Home</a>
-            </div>
-            <div class="grid-33">
-                <!-- Say Hi -->
-                <h1>Hello{% if current_user.is_authenticated %} {{ current_user.username }}{% endif %}!</h1>
-            </div>
-            <div class="grid-33">
-                <!-- Log in/Log out -->
-                {% if current_user.is_authenticated %}
-                    <a href="{{ url_for('logout') }}">Logout</a>
-                {% else %}
-                    <a href="{{ url_for('login') }}">Login</a>
-                    <a href="{{ url_for('register') }}">Register</a>
-                {% endif %}
-            </div>
-          </div>
-        </header>
+        <div class="container">
+        <nav class="navbar navbar-dark bg-primary">
+            <div class="nav navbar-nav">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <a class="nav-item nav-link active" href="{{ url_for('index') }}">Home</a>
+                    </div>
+                    <div class="col-sm-4">
+                        <!-- Say Hi -->
+                        <p class="text-xs-center">Hello{% if current_user.is_authenticated %} {{ current_user.username }}{% endif %}!</p>
+                    </div>
+                     <!-- Log in/Log out -->
+                    <div class="pull-xs-right">
+                        {% if current_user.is_authenticated %}
+                            <div class="col-sm-4">
+                                <a class="nav-item nav-link active" href="{{ url_for('logout') }}">Logout</a>
+                            </div>
+                        {% else %}
+                            <div class="col-sm-4">
+                                <a class="nav-item nav-link active" href="{{ url_for('login') }}">Login</a>
+                            </div>
+                            <div class="col-sm-4">
+                                <a class="nav-item nav-link active" href="{{ url_for('register') }}">Register</a>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                  </div>
+                </nav>
+            </nav>
+        </div> <!-- end container div -->
         <!-- Flash messages -->
         {% with messages = get_flashed_messages(with_categories=True) %}
             {% if messages %}
@@ -44,27 +53,39 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        <div class="row">
-        <div>
-            <h1>Accountable Politics</h1>
-        </div>
-          <div class="main">
-
-            <nav>
-                <a href="{{ url_for('index') }}">All</a>
-                    {% if current_user.is_authenticated %}
-                        <a href="{{ url_for('stream', username=current_user.username) }}">Following</a>
-                        <a href="{{ url_for('post') }}" class="new">Create New Post</a>
-                    {% endif %}
-            </nav>
-            {% block content %}{% endblock %}
-          </div>
-        </div>
+        <div class="container">
+            <div class="row">
+                <div>
+                    <h1 class="display-4 text-xs-center" style="position: relative; bottom: -20px;">Accountable Politics</h1>
+                </div>
+            </div> <!-- end row div -->
+                <div class="container" style="position: relative; bottom: -20px;">
+                    <div class="row"
+                        <nav class="navbar navbar-light bg-faded" style="border-bottom-style: solid; border-bottom-color: #e3f2fd;" >
+                             <div class="nav navbar-nav">
+                                <a class="container nav-item nav-link active" href="{{ url_for('index') }}">All</a>
+                                {% if current_user.is_authenticated %}
+                                    <a class="nav-item nav-link active" href="{{ url_for('stream', username=current_user.username) }}">Following</a>
+                                    <div class="container pull-xs-right">
+                                        <a class="nav-item nav-link active" href="{{ url_for('post') }}" class="new">+ Create New Post</a>
+                                    </div>
+                                {% endif %}
+                             </div>
+                        </nav>
+                </div><!-- end row div -->
+            <div class="container" style="position: relative; bottom: -20px; border-style: solid; border-color: #e3f2fd;">
+                {% block content %}{% endblock %}
+            </div>
+            </div> <!-- end container div -->
+        </div> <!-- end container div -->
         <footer>
-          <div class="row">
-            <p>Accountable Politics<br>CS361 Project B</p>
-          </div>
+            <div class="container " style="position: relative; bottom: -100px;">
+                <div class="row">
+                    <p class="text-xs-center">Accountable Politics<br>CS361 Project B</p>
+                </div> <!-- end row div -->
+            </div>    <!-- end container div -->
         </footer>
-        <script src="/static/js/main.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
     </body>
 </html>
