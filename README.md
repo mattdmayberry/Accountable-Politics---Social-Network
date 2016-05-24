@@ -34,6 +34,7 @@ This installs python3, xcode, and clones the app repository. It also sets up a v
     Mako==1.0.4
     MarkupSafe==0.23
     peewee==2.8.1
+    postgresql==9.5.3
     psycopg2==2.6.1
     pycparser==2.14
     python-dateutil==1.5
@@ -44,8 +45,7 @@ This installs python3, xcode, and clones the app repository. It also sets up a v
     urlparse3==1.0.8
     Werkzeug==0.11.9
     WTForms==2.1
-
-(If you are attempting to create a virtualenv using Windows OS, you will need to also install postgresql which is not included in the requirements.txt file)
+    
 
 ### Running Tests
 !! NEED TO UPDATE THIS SECTION WITH TESTING INFO !!
