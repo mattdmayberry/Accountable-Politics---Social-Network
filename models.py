@@ -8,7 +8,7 @@ from flask.ext.login import UserMixin
 from peewee import *
 import urllib
 from urllib.parse import urlparse
-#import psycopg2
+import psycopg2
 
 db_proxy = Proxy()
 
