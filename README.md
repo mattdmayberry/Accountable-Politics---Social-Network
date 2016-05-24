@@ -12,9 +12,9 @@ This assumes you're running OSX and already have [Homebrew](http://brew.sh/) ins
 	cd accountable
 	pyvenv env
 	source env/bin/activate
-	invoke install
+	pip install -r requirements.txt
 
-This installs python3, the [invoke utility](https://github.com/pyinvoke/invoke), xcode, and clones the app repository. It also sets up a virtual environment for the app, and installs all the python dependencies into the virtual environment.	
+This installs python3, xcode, and clones the app repository. It also sets up a virtual environment for the app, and installs all the python dependencies into the virtual environment.	
 
 ### Dependencies
 	alembic==0.8.6
