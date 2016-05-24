@@ -45,6 +45,8 @@ This installs python3, xcode, and clones the app repository. It also sets up a v
     Werkzeug==0.11.9
     WTForms==2.1
 
+(If you are attempting to create a virtualenv using Windows OS, you will need to also install postgresql which is not included in the requirements.txt file)
+
 ### Running Tests
 !! NEED TO UPDATE THIS SECTION WITH TESTING INFO !!
 
