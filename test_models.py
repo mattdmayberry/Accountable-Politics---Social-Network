@@ -11,8 +11,11 @@ class Test_Models(unittest.TestCase):
  
 #   TEST CASE SET UP    #
 
-    def setUp(self):
+    @classmethod
+    def setUpClass(self):
+        print("Initializing Test Instances...")
         
+        print("> Creating Users: ", end='')
         #create a test user
         models.User.create_user(
             username="test_models_user",
@@ -20,7 +23,9 @@ class Test_Models(unittest.TestCase):
             password="test_models_user_pw"
             )
         self.user = models.User.get(models.User.username == "test_models_user")
-
+        
+        print("User1 created", end='')
+        
         #create a 2nd test user
         models.User.create_user(
             username="test_models_user2",
@@ -28,23 +33,32 @@ class Test_Models(unittest.TestCase):
             password="test_models_user2_pw"
             )
         self.user2 = models.User.get(models.User.username == "test_models_user2")
+
+        print(", User2 created")
         
+        print("> Creating Posts: ", end='')
         #create a test post for user
         models.Post.create(user = self.user, content = "test post content")
         self.post = models.Post.get(models.Post.user == self.user)
+        print("post1 created", end='')
         
         #create a test post for user2
         models.Post.create(user = self.user2, content = "test post content 2")
         self.post2 = models.Post.get(models.Post.user == self.user2)
+        print(", post2 created")
+        
+        print("> Creating Relationship: ", end='')
         
         #create Relationship: user follows user2
         models.Relationship.create(from_user = self.user, to_user = self.user2)
         self.relationship = models.Relationship().get(
                                     models.Relationship.from_user == self.user)
+        print("User1 following User2")
         
 #   TEST CASE TEAR DOWN     #
-
-    def tearDown(self):
+    @classmethod
+    def tearDownClass(self):
+        print("Deleting Test Instances")
         self.user.delete_instance()
         self.user = None
         self.user2.delete_instance()
@@ -94,13 +108,11 @@ class Test_Models(unittest.TestCase):
     def test_user_followers(self):
         self.assertEqual(self.user.followers(), self.user2,
                                         "incorrect user followers")
-    def test_user_get_stream_1(self):
-        self.stream = self.user.get_stream()
-        self.assertEqual(len(self.stream), 2)   
-
-    def test_user_get_stream_2(self):
-        self.stream = self.user2.get_stream()
-        self.assertEqual(len(self.stream), 1)   
+    def test_user_get_stream(self):
+        with self.subTest(i=1):
+            self.assertEqual(len(self.user.get_stream()), 2)   
+        with self.subTest(i=2):
+             self.assertEqual(len(self.user2.get_stream()), 1)   
         
     def test_user_get_posts(self):
         self.assertEqual(self.user.get_posts(), self.post, 
