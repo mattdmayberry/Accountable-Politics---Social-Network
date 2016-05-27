@@ -45,7 +45,7 @@ This installs python3, xcode, and clones the app repository. It also sets up a v
     urlparse3==1.0.8
     Werkzeug==0.11.9
     WTForms==2.1
-    
+
 
 ### Running Tests
 !! NEED TO UPDATE THIS SECTION WITH TESTING INFO !!
