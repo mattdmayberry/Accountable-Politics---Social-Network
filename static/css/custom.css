@@ -13,7 +13,7 @@ body {
 	border-radius: 25px;
 	-moz-border-radius: 25px;
 	color: white
-	
+
 }
 
 #header {
@@ -40,4 +40,4 @@ a
    padding: 3px;
    display: inline-block;
 }
-a:hover { background-color: #1a8cff; color: #fff; box-shadow: 2px 2px 2px #434343; } 
+a:hover { background-color: #1a8cff; color: #fff; box-shadow: 2px 2px 2px #434343; }
