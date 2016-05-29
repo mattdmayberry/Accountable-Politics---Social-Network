@@ -3,7 +3,7 @@
 
 {% block content %}
 <form method="POST" action="">
-    <fieldset class="form-group text-xs-left" style="width: 100%">
+    <fieldset class="form-group">
         {{ form.hidden_tag() }}
         {% for field in form %}
             {{ render_field(field) }}

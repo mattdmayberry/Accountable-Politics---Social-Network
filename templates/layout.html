@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+        <link rel="stylesheet" type="css" href={{ url_for('static', filename='css/custom.css') }}>
         <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/fontello.css') }}>
         <!--[if lt IE 9]>
             <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -16,44 +17,45 @@
     </head>
     <body>
         <div class="container">
-        <nav class="navbar navbar-dark bg-primary">
-            <div class="nav navbar-nav">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <a class="nav-item nav-link active" href="{{ url_for('index') }}">Home</a>
+            <nav class="navbar navbar-dark bg-primary">
+                <div class="nav navbar-nav">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <a class="nav-item nav-link active" href="{{ url_for('index') }}">Home</a>
+                        </div>
+                        <div class="col-sm-4">
+                            <!-- Say Hi -->
+                            <p class="text-xs-center">Hello{% if current_user.is_authenticated %} {{ current_user.username }}{% endif %}!</p>
+                        </div>
+                         <!-- Log in/Log out -->
+                        <div class="pull-xs-right">
+                            {% if current_user.is_authenticated %}
+                                <div class="col-sm-4">
+                                    <a class="nav-item nav-link active" href="{{ url_for('logout') }}">Logout</a>
+                                </div>
+                            {% else %}
+                                <div class="col-sm-4">
+                                    <a class="nav-item nav-link active" href="{{ url_for('login') }}">Login</a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a class="nav-item nav-link active" href="{{ url_for('register') }}">Register</a>
+                                </div>
+                            {% endif %}
+                        </div>
                     </div>
-                    <div class="col-sm-4">
-                        <!-- Say Hi -->
-                        <p class="text-xs-center">Hello{% if current_user.is_authenticated %} {{ current_user.username }}{% endif %}!</p>
-                    </div>
-                     <!-- Log in/Log out -->
-                    <div class="pull-xs-right">
-                        {% if current_user.is_authenticated %}
-                            <div class="col-sm-4">
-                                <a class="nav-item nav-link active" href="{{ url_for('logout') }}">Logout</a>
-                            </div>
-                        {% else %}
-                            <div class="col-sm-4">
-                                <a class="nav-item nav-link active" href="{{ url_for('login') }}">Login</a>
-                            </div>
-                            <div class="col-sm-4">
-                                <a class="nav-item nav-link active" href="{{ url_for('register') }}">Register</a>
-                            </div>
-                        {% endif %}
-                    </div>
-
-                  </div>
-                </nav>
+                </div>
             </nav>
         </div> <!-- end container div -->
         <!-- Flash messages -->
-        {% with messages = get_flashed_messages(with_categories=True) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="notification {{ category }}">{{ message }}</div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+        <div class="text-xs-center"></div>
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="notification text-xs-center" style="background-color: #94FA6B" {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
         <div class="container">
             <div class="row">
                 <div style="position: relative; bottom: -30px; vertical-align: text-bottom">
@@ -61,20 +63,21 @@
                 </div>
                 <br>
             </div> <!-- end row div -->
-                <div class="container" style="position: relative; bottom: -20px;">
-                    <div class="row"
-                        <nav class="navbar navbar-light bg-faded" style="border-bottom-style: solid; border-bottom-color: #e3f2fd;" >
-                             <div class="nav navbar-nav">
-                                <a class="container nav-item nav-link active" href="{{ url_for('index') }}">All</a>
-                                {% if current_user.is_authenticated %}
-                                    <a class="nav-item nav-link active" href="{{ url_for('stream', username=current_user.username) }}">Following</a>
-                                    <div class="container pull-xs-right">
-                                        <a class="nav-item nav-link active" href="{{ url_for('post') }}" class="new"> + Create New Post</a>
-                                    </div>
-                                {% endif %}
-                             </div>
-                        </nav>
-                </div><!-- end row div -->
+            <div class="container" style="position: relative; bottom: -20px;">
+                <div class="row"
+                    <nav class="navbar navbar-light bg-faded" style="border-bottom-style: solid; border-bottom-color: #e3f2fd;" >
+                         <div class="nav navbar-nav">
+                            <a class="container nav-item nav-link active" href="{{ url_for('index') }}">All</a>
+                            {% if current_user.is_authenticated %}
+                                <a class="nav-item nav-link active" href="{{ url_for('stream', username=current_user.username) }}">Following</a>
+                                <div class="container pull-xs-right">
+                                    <a class="nav-item nav-link active" href="{{ url_for('post') }}" class="new"> + Create New Post</a>
+                                </div>
+                            {% endif %}
+                         </div>
+                    </nav>
+                </div>
+            </div><!-- end row div -->
             <div class="container" style="position: relative; bottom: -20px;">
                 {% block content %}{% endblock %}
             </div>

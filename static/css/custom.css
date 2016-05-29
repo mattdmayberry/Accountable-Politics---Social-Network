@@ -1,9 +1,6 @@
-
-div .post_row {
+.post_row {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
 }
-
-
 
