@@ -1,43 +1,9 @@
-body {
-	margin:0;
-	padding:0;
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-	line-height: 1.5em;
-	background: #99ccff;
+
+div .post_row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
 
-.postcss {
-	background:  #0073e6;
-	padding: 20px;
-	border: 2px solid #000;
-	border-radius: 25px;
-	-moz-border-radius: 25px;
-	color: white
 
-}
 
-#header {
-	text-shadow: 2px 2px 2px #434343;
-	background: #23608E;
-	height: 100px;
-	text-decoration: none;
-	color: white;
-}
-
-#header h1 {
-	margin: 0;
-	padding-top: 15px;
-}
-
-a
-{
-   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-   background-color:  #0073e6;
-   color: #fff;
-   text-decoration: none;
-   font-weight: bold;
-   margin: 10px 3px 10px 3px;
-   padding: 3px;
-   display: inline-block;
-}
-a:hover { background-color: #1a8cff; color: #fff; box-shadow: 2px 2px 2px #434343; }

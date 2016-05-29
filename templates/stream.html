@@ -6,25 +6,39 @@
         <article>
             <div class="container" style="style=position: relative; bottom: -20px; padding-bottom: 20px;">
                 <br>
-                <h2>
-                    <a href="{{ url_for('stream', username=post.user.username) }}">{{ post.user.username }}</a>
-                </h2>
-                <i class="clock"></i><time data-time="{{ post.timestamp }}" class="distime" datetime="{{
-                    post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}">{{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</time>
-                <div class="row">
-                    <div class="post col-sm-4" style="width: 85%">
+                    <div class="post_row">
+                        <h2>
+                            <a href="{{ url_for('stream', username=post.user.username) }}">{{ post.user.username }}</a>
+                        </h2>
+                    </div>
+                <div class="post_row">
+                    <i class="clock"></i><time data-time="{{ post.timestamp }}" class="distime" datetime="{{
+                        post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}">{{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</time>
+                    <div class="pull-xs-right">
+                        <div>
+                            <a href class="text-xl-center">True</a>
+                            <p class="text-xl-center">0</p>
+                        </div>
+                        <div>
+                            <a href class="text-xl-center">False</a>
+                            <p class="text-xl-center">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="post_row">
+                    <div style="width: 75%">
                         {{ post.content }}
                     </div>
-                    <div class="pull-xs-right">
-                        <a href class="true">True</a>
-                        <a href class="false">False</a>
-                    </div>
-                </div>
                     <br>
+                </div>
+                <div class="post_row">
+                    <div class="pull-xs-left">
                         <a href="{{ url_for('view_post', post_id=post.id) }}" class="view">View</a>
                         <a href="{{ url_for('delete_post', post_id=post.id) }}" class="delete">Delete</a>
-                    <br>
+                    </div>
                 </div>
+            </div>
         </article>
     </div>
     <br>
