@@ -12,7 +12,7 @@ import psycopg2
 
 db_proxy = Proxy()
 
-# heroku config:set HEROKU=1).
+# heroku config:set HEROKU=1
 if 'HEROKU' in os.environ:
     urllib.parse.uses_netloc.append('postgres')
     url = urlparse(os.environ["DATABASE_URL"])
@@ -75,6 +75,7 @@ class User(UserMixin, Model):
         except IntegrityError:
             raise ValueError("User already exists")
 
+
 class Post(Model):
     timestamp = DateTimeField(default=datetime.datetime.now())
     user = ForeignKeyField(
@@ -88,6 +89,34 @@ class Post(Model):
         order_by = ('-timestamp',)
 
 
+class Upvote(Model):
+    post = ForeignKeyField(
+        rel_model=Post,
+        related_name='upvotes'
+    )
+    user = ForeignKeyField(
+        rel_model=User,
+        related_name='upvotes'
+    )
+
+    class Meta:
+        database = db_proxy
+
+
+class Downvote(Model):
+    post = ForeignKeyField(
+        rel_model=Post,
+        related_name='downvotes'
+    )
+    user = ForeignKeyField(
+        rel_model=User,
+        related_name='downvotes'
+    )
+
+    class Meta:
+        database = db_proxy
+
+
 class Relationship(Model):
     from_user = ForeignKeyField(User, related_name='relationships')
     to_user = ForeignKeyField(User, related_name='related_to')
@@ -95,11 +124,11 @@ class Relationship(Model):
     class Meta:
         database = db_proxy
         indexes = (
-            (('from_user', 'to_user'), True),  # Note the trailing comma!
+            (('from_user', 'to_user'), True),  # trailing comma required
         )
 
 
-# heroku config:set HEROKU=1).
 def initialize():
     db_proxy.connect()
-    db_proxy.create_tables([User, Post, Relationship], safe=True)
+    db_proxy.create_tables([User, Post, Relationship, Upvote, Downvote], safe=True)
+

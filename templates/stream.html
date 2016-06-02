@@ -13,13 +13,13 @@
                     </div>
                 <div class="post_row">
                     <i class="clock"></i><time data-time="{{ post.timestamp }}" class="distime" datetime="{{
-                        post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}">{{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</time>
+                        post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}">{{ post.timestamp.strftime('%Y-%m-%d %H:%M') }}</time>
                     <div class="pull-xs-right">
                         <div>
-                            <a href class="text-xl-center">True</a><p class="text-xl-center">0</p>
+                            <a href="{{ url_for('upvote', post_id=post.id) }}">True</a><p>{{ post.upvotes.count() }}</p>
                         </div>
                         <div>
-                            <a href class="text-xl-center">False</a><p class="text-xl-center">0</p>
+                            <a href="{{ url_for('downvote', post_id=post.id) }}">False</a><p>{{ post.downvotes.count() }}</p>
                         </div>
                     </div>
                 </div>
@@ -30,12 +30,10 @@
                     </div>
                     <br>
                 </div>
-                <div class="post_row">
-                    <div class="pull-xl-left">
-                        <a href="{{ url_for('view_post', post_id=post.id) }}" class="view">View</a>
-                        <a href="{{ url_for('delete_post', post_id=post.id) }}" class="delete">Delete</a>
-                        <a href="{{ url_for('stream', post_id=post.id) }}" class="comment">Comment</a>
-                    </div>
+                <div class="pull-xl-left">
+                    <a href="{{ url_for('view_post', post_id=post.id) }}" class="view">View</a>
+                    <a href="{{ url_for('delete_post', post_id=post.id) }}" class="delete">Delete</a>
+                    <a href="{{ url_for('stream', post_id=post.id) }}" class="comment">Comment</a>
                 </div>
             </div>
         </article>
