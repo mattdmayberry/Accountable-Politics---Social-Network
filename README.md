@@ -51,7 +51,7 @@ This installs python3, xcode, and clones the app repository. It also sets up a v
 
 ### Running Locally
 
-Run `invoke serve` from the project directory to run locally.
+Run `python app.py` from the project directory to run locally.
 
 This will run the project on [port 5000](http://localhost:5000/).
 
