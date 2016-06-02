@@ -16,10 +16,10 @@
                         post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}">{{ post.timestamp.strftime('%Y-%m-%d %H:%M') }}</time>
                     <div class="pull-xs-right">
                         <div>
-                            <a href="{{ url_for('upvote', post_id=post.id) }}">True</a><p>0</p>
+                            <a href="{{ url_for('upvote', post_id=post.id) }}">True</a><p>{{ post.upvotes.count() }}</p>
                         </div>
                         <div>
-                            <a href="{{ url_for('downvote', post_id=post.id) }}">False</a><p>0</p>
+                            <a href="{{ url_for('downvote', post_id=post.id) }}">False</a><p>{{ post.downvotes.count() }}</p>
                         </div>
                     </div>
                 </div>
