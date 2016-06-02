@@ -88,12 +88,6 @@ class Post(Model):
         database = db_proxy
         order_by = ('-timestamp',)
 
-    def get_upvotes(self):
-        return Upvote.select().where(Upvote.post == self)
-
-    def get_downvotes(self):
-        return Downvote.select().where(Downvote.post == self)
-
 
 class Upvote(Model):
     post = ForeignKeyField(
