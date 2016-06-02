@@ -11,7 +11,7 @@ from app import *
 
 class Test_App(unittest.TestCase):
     
-    #render_templates = False
+    render_templates = False
     
     @classmethod
     def setUpClass(self):
@@ -43,54 +43,27 @@ class Test_App(unittest.TestCase):
                     "password2":"test_password"}
         #session = requests.Session()                
         #session.post('/register', params = payload)
-        try:
-            result = self.app.post('/register', data = payload, follow_redirects=True)
-            self.user = models.User.get(models.User.username == "test_user_reg")
-        except:
-            self.assertTrue(0)
-        else:
-            self.assertTrue(1)
+        result = self.app.post('/register', data = payload, follow_redirects=True)
+        self.user = models.User.get(models.User.username == "test_user_reg")
         
         
-    def test_register_duplicate_email(self):
-        payload = {'username':'test_user_reg5', 
+    def test_register_duplicate(self):
+            payload = {'username':'test_user_reg4', 
                     'email':"test_user@example.com",
                     "password":"test_password",
                     "password2":"test_password"}
-        try:
+        #session = requests.Session()                
+        #session.post('/register', params = payload)
+        #try:
             result = self.app.post('/register', data = payload, follow_redirects=True)
-            user = models.User.get(models.User.username == "test_user_reg5")
-        except:
-            self.assertTrue(1)
-        else:
-            self.assertTrue(0)
+            user = models.User.get(models.User.username == "test_user_reg")
+            if(user):
+                print(user.username)
+        #except:
+            #self.assertTrue(1)
+        #else:
+            #self.assertTrue(0)
             
-    def test_register_duplicate_username(self):
-        payload = {'username':'test_user_reg', 
-                    'email':"test_user1@example.com",
-                    "password":"test_password",
-                    "password2":"test_password"}
-        try:
-            result = self.app.post('/register', data = payload, follow_redirects=True)
-            user = models.User.get(models.User.username == "test_user_reg5")
-        except:
-            self.assertTrue(1)
-        else:
-            self.assertTrue(0)
-            
-    def test_login(self):
-        with self.app:
-            payload = {'email':"test_user@example.com",
-                        'password':"test_password"}
-            self.app.post('/login', data = "", follow_redirects=True)
-            f = self.LoginForm()
-            f.email = "test_user@example.com"
-            f.password = "test_password"
-            
-            print(f.validate_on_submit())
-            #self.assertEqual(f.is_submitted(), False)
-            
-        
     # def register_form(self, Form, username, email, password):
     #     self.form.username = username
     #     self.form.email = email
