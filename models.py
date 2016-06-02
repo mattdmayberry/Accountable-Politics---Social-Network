@@ -75,6 +75,7 @@ class User(UserMixin, Model):
         except IntegrityError:
             raise ValueError("User already exists")
 
+
 class Post(Model):
     timestamp = DateTimeField(default=datetime.datetime.now())
     user = ForeignKeyField(
@@ -87,6 +88,40 @@ class Post(Model):
         database = db_proxy
         order_by = ('-timestamp',)
 
+    def get_upvotes(self):
+        return Upvote.select().where(Upvote.post == self)
+
+    def get_downvotes(self):
+        return Downvote.select().where(Downvote.post == self)
+
+
+class Upvote(Model):
+    post = ForeignKeyField(
+        rel_model=Post,
+        related_name='upvotes'
+    )
+    user = ForeignKeyField(
+        rel_model=User,
+        related_name='upvotes'
+    )
+
+    class Meta:
+        database = db_proxy
+
+
+class Downvote(Model):
+    post = ForeignKeyField(
+        rel_model=Post,
+        related_name='downvotes'
+    )
+    user = ForeignKeyField(
+        rel_model=User,
+        related_name='downvotes'
+    )
+
+    class Meta:
+        database = db_proxy
+
 
 class Relationship(Model):
     from_user = ForeignKeyField(User, related_name='relationships')
@@ -95,14 +130,12 @@ class Relationship(Model):
     class Meta:
         database = db_proxy
         indexes = (
-            (('from_user', 'to_user'), True),  # Note the trailing comma!
+            (('from_user', 'to_user'), True),  # trailing comma required
         )
 
 
 # heroku config:set HEROKU=1).
 def initialize():
     db_proxy.connect()
-    db_proxy.create_tables([User, Post, Relationship], safe=True)
-
-
+    db_proxy.create_tables([User, Post, Relationship, Upvote, Downvote], safe=True)
 
