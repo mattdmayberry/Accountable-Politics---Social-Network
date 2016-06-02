@@ -12,7 +12,7 @@ import psycopg2
 
 db_proxy = Proxy()
 
-# heroku config:set HEROKU=1).
+# heroku config:set HEROKU=1
 if 'HEROKU' in os.environ:
     urllib.parse.uses_netloc.append('postgres')
     url = urlparse(os.environ["DATABASE_URL"])
@@ -128,7 +128,6 @@ class Relationship(Model):
         )
 
 
-# heroku config:set HEROKU=1).
 def initialize():
     db_proxy.connect()
     db_proxy.create_tables([User, Post, Relationship, Upvote, Downvote], safe=True)
