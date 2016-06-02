@@ -6,8 +6,6 @@ import models
 
 from flask.ext.bcrypt import check_password_hash
 import datetime
-from wtforms.validators import (DataRequired, Regexp, ValidationError, Email,
-                               Length, EqualTo)
 
 class Test_Models(unittest.TestCase):
  
@@ -92,34 +90,17 @@ class Test_Models(unittest.TestCase):
     def test_user_attribute_admin(self):
         self.assertFalse(self.user.is_admin, "incorrect admin")
         
-    # def test_user_duplicate_username(self):
-    #     try:
-    #         models.User.create_user(
-    #             username="test_models_user",
-    #             email="totally_new_email@example.com",
-    #             password="awesome_unique_password"
-    #         )
-    #     except:
-    #         self.assertTrue(1)  #expect an exception will occur
-    #     else:
-    #         self.assertTrue(0)
-    
-    def test_user_duplicate_username(self):
-        with self.assertRaises(ValueError):
+    def test_user_duplication(self):
+        try:
             models.User.create_user(
                 username="test_models_user",
-                email="superUniqueEmail@example.com",
-                password="superSecurePassword"
-            )      
-            
-    def test_user_duplicate_email(self):
-        with self.assertRaises(ValueError):
-            models.User.create_user(
-                username="test_models_user_2",
                 email="test_models_user@example.com",
                 password="test_models_user_pw"
             )
-        
+        except:
+            self.assertTrue(1)  #expect an exception will occur
+        else:
+            self.assertTrue(0)
     
     def test_user_following(self):
         self.assertEqual(self.user.following(), self.user2, 

@@ -6,6 +6,7 @@
 This assumes you're running OSX and already have [Homebrew](http://brew.sh/) installed as well as an [ssh key added to your github account](https://help.github.com/articles/generating-an-ssh-key/).
 
 	brew install python3
+	pip install invoke
 	xcode-select --install
 	git clone git@github.com:mattdmayberry/accountable.git
 	cd accountable
@@ -51,7 +52,7 @@ This installs python3, xcode, and clones the app repository. It also sets up a v
 
 ### Running Locally
 
-Run `python app.py` from the project directory to run locally.
+Run `invoke serve` from the project directory to run locally.
 
 This will run the project on [port 5000](http://localhost:5000/).
 

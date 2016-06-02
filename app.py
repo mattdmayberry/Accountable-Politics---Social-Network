@@ -137,7 +137,7 @@ def view_post(post_id):
 def delete_post(post_id):
     post = models.Post.delete().where(models.Post.id == post_id).execute()
     flash("This post has successfully been deleted.", "success")
-    return redirect(url_for('stream', stream=stream))
+    return redirect(url_for('stream', stream = stream))
 
 
 @app.route('/follow/<username>')
@@ -177,24 +177,6 @@ def unfollow(username):
             pass
             flash("You are no longer following {}!".format(to_user.username), "success")
     return redirect(url_for('stream', username=to_user.username))
-
-
-@app.route('/upvote/<int:post_id>')
-@login_required
-def upvote(post_id):
-    post = models.Post.select().where(models.Post.id == post_id)
-    models.Upvote.create(user=g.user.id, post=post_id)
-    flash("Vote Registered!", "success")
-    return redirect(url_for('index'))
-
-
-@app.route('/downvote/<int:post_id>')
-@login_required
-def downvote(post_id):
-    post = models.Post.select().where(models.Post.id == post_id)
-    models.Downvote.create(user=g.user.id, post=post_id)
-    flash("Vote Registered!", "success")
-    return redirect(url_for('index'))
 
 
 @app.errorhandler(404)
