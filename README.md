@@ -6,7 +6,6 @@
 This assumes you're running OSX and already have [Homebrew](http://brew.sh/) installed as well as an [ssh key added to your github account](https://help.github.com/articles/generating-an-ssh-key/).
 
 	brew install python3
-	pip install invoke
 	xcode-select --install
 	git clone git@github.com:mattdmayberry/accountable.git
 	cd accountable
