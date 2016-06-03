@@ -2,7 +2,7 @@
 
 {% block content %}
 {% for post in stream %}
-    <div class="container" style="position: relative; bottom: -25px; border-style: solid; border-color: #e3f2fd;">
+    <div class="container" style="background-color: #F8F8F8; position: relative; bottom: -25px; border-style: solid; border-color: lightblue;">
         <article>
             <div class="container" style="style=position: relative; bottom: -20px; padding-bottom: 20px;">
                 <br>
@@ -31,9 +31,9 @@
                     <br>
                 </div>
                 <div class="pull-xl-left">
-                    <a href="{{ url_for('view_post', post_id=post.id) }}" class="view">View</a>
-                    <a href="{{ url_for('delete_post', post_id=post.id) }}" class="delete">Delete</a>
-                    <a href="{{ url_for('stream', post_id=post.id) }}" class="comment">Comment</a>
+                    <a href="{{ url_for('view_post', post_id=post.id) }}" class="view" style="padding-right: 10px">View</a>
+                    <a href="{{ url_for('delete_post', post_id=post.id) }}" class="delete" style="padding-right: 10px">Delete</a>
+                    <a href="{{ url_for('stream', post_id=post.id) }}" class="comment" style="padding-right: 10px">Comment</a>
                 </div>
             </div>
         </article>
