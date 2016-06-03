@@ -1,5 +1,5 @@
 ## Accountable Politics
-[https://accountable-politics.herokuapp.com/](https://accountable-politics.herokuapp.com/)
+[http://sheltered-island-22875.herokuapp.com//](http://sheltered-island-22875.herokuapp.com/)
 
 ### Setup
 
@@ -60,8 +60,6 @@ This will run the project on [port 5000](http://localhost:5000/).
 [PyCharm](https://www.jetbrains.com/pycharm/) is an IDE from Jetbrains for python. It can be installed by running `brew cask install pycharm`.
 
 Open pycharm, input a license, and select to install the command line tool. Then, open the project in pycharm by running `charm` . from the project directory. Wait for pycharm to load it, and then you're good to go! Jetbrains offers [free licences](https://www.jetbrains.com/student/) to students for all of their products.
-
-Make sure to change the python tests configuration for nosetests (Edit Configurations -> Python Tests -> Nosetests) so that the working directory is the project directory (not the test directory!)
 
 
 ### Using Git
