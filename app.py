@@ -183,8 +183,16 @@ def unfollow(username):
 @login_required
 def upvote(post_id):
     post = models.Post.select().where(models.Post.id == post_id)
-    models.Upvote.create(user=g.user.id, post=post_id)
-    flash("Vote Registered!", "success")
+    
+    #users cannot upvote more than once on the same post!
+    try:
+        upvote = models.Upvote.get(models.Upvote.post == post_id, 
+                                    models.Upvote.user == g.user.id)
+        flash("Sorry Cannot Upvote More Than Once!", "success")
+    except:
+        models.Upvote.create(user=g.user.id, post=post_id)
+        flash("Vote Registered!", "success")
+    
     return redirect(url_for('index'))
 
 
@@ -192,8 +200,14 @@ def upvote(post_id):
 @login_required
 def downvote(post_id):
     post = models.Post.select().where(models.Post.id == post_id)
-    models.Downvote.create(user=g.user.id, post=post_id)
-    flash("Vote Registered!", "success")
+ 
+    try:
+        models.Downvote.get(models.Downvote.post == post_id, 
+                            models.Downvote.user == g.user.id)
+        flash("Sorry Cannot Downvote More Than Once!", "success")
+    except:    
+        models.Downvote.create(user=g.user.id, post=post_id)
+        flash("Vote Registered!", "success")
     return redirect(url_for('index'))
 
 
