@@ -78,7 +78,7 @@ class Post(Model):
     timestamp = DateTimeField(default=datetime.datetime.now())
     user = ForeignKeyField(
         rel_model=User,
-        related_name='posts'
+        related_name='post_user'
     )
     content = TextField()
 
@@ -114,7 +114,20 @@ class Downvote(Model):
     class Meta:
         database = db_proxy
 
-
+class Comment(Model):
+    post = ForeignKeyField(
+        rel_model=Post,
+        related_name='comment-post'
+    )
+    user = ForeignKeyField(
+        rel_model=User,
+        related_name='comment-user'
+    )
+    content = TextField()
+    
+    class Meta:
+        database = db_proxy
+        
 class Relationship(Model):
     from_user = ForeignKeyField(User, related_name='relationships')
     to_user = ForeignKeyField(User, related_name='related_to')
@@ -128,5 +141,5 @@ class Relationship(Model):
 
 def initialize():
     db_proxy.connect()
-    db_proxy.create_tables([User, Post, Relationship, Upvote, Downvote], safe=True)
+    db_proxy.create_tables([User, Post, Relationship, Upvote, Downvote, Comment], safe=True)
 

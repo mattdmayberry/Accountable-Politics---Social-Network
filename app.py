@@ -127,9 +127,10 @@ def stream(username=None):
 def view_post(post_id):
     """Get all the posts that have this id"""
     posts = models.Post.select().where(models.Post.id == post_id)
+    form = forms.CommentForm()
     if posts.count() == 0:
         abort(404)
-    return render_template('stream.html', stream=posts)
+    return render_template('stream.html', stream=posts, form=form)
 
 
 @app.route('/delete_post/<int:post_id>')

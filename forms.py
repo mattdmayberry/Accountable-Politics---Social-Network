@@ -58,3 +58,6 @@ class LoginForm(Form):
 
 class PostForm(Form):
     content = TextAreaField('Create new post', validators=[DataRequired()])
+
+class CommentForm(Form):
+    content = TextAreaField('Comment on Post', validators=[DataRequired()])
