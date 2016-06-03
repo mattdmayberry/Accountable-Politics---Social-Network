@@ -195,14 +195,15 @@ def upvote(post_id):
             #delete the downvote instance if one exists
             downvote = models.Downvote.get(models.Downvote.post == post_id, 
                             models.Downvote.user == g.user.id).delete_instance()
+            #create upvote for post
             models.Upvote.create(user=g.user.id, post=post_id)
             flash("Vote Changed!", "success")  
         except:  
+            #create upvote for post
             models.Upvote.create(user=g.user.id, post=post_id)
             flash("Vote Registered!", "success")
     
     return redirect(url_for('index'))
-
 
 @app.route('/downvote/<int:post_id>')
 @login_required
@@ -219,9 +220,11 @@ def downvote(post_id):
             #delete the upvote instance if one exists
             upvote = models.Upvote.get(models.Upvote.post == post_id, 
                             models.Upvote.user == g.user.id).delete_instance()
+            #create downvote for post
             models.Downvote.create(user=g.user.id, post=post_id)
             flash("Vote Changed!", "success")        
         except:
+            #create downvote for post
             models.Downvote.create(user=g.user.id, post=post_id)
             flash("Vote Registered!", "success")
     return redirect(url_for('index'))
