@@ -190,8 +190,16 @@ def upvote(post_id):
                                     models.Upvote.user == g.user.id)
         flash("Sorry Cannot Upvote More Than Once!", "success")
     except:
-        models.Upvote.create(user=g.user.id, post=post_id)
-        flash("Vote Registered!", "success")
+        
+        try:
+            #delete the downvote instance if one exists
+            downvote = models.Downvote.get(models.Downvote.post == post_id, 
+                            models.Downvote.user == g.user.id).delete_instance()
+            models.Upvote.create(user=g.user.id, post=post_id)
+            flash("Vote Changed!", "success")  
+        except:  
+            models.Upvote.create(user=g.user.id, post=post_id)
+            flash("Vote Registered!", "success")
     
     return redirect(url_for('index'))
 
@@ -205,9 +213,17 @@ def downvote(post_id):
         models.Downvote.get(models.Downvote.post == post_id, 
                             models.Downvote.user == g.user.id)
         flash("Sorry Cannot Downvote More Than Once!", "success")
-    except:    
-        models.Downvote.create(user=g.user.id, post=post_id)
-        flash("Vote Registered!", "success")
+    except:
+        
+        try:
+            #delete the upvote instance if one exists
+            upvote = models.Upvote.get(models.Upvote.post == post_id, 
+                            models.Upvote.user == g.user.id).delete_instance()
+            models.Downvote.create(user=g.user.id, post=post_id)
+            flash("Vote Changed!", "success")        
+        except:
+            models.Downvote.create(user=g.user.id, post=post_id)
+            flash("Vote Registered!", "success")
     return redirect(url_for('index'))
 
 
