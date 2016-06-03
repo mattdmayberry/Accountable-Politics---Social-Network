@@ -136,10 +136,13 @@ def view_post(post_id):
 @app.route('/delete_post/<int:post_id>')
 @login_required
 def delete_post(post_id):
-    post = models.Post.delete().where(models.Post.id == post_id).execute()
-    flash("This post has successfully been deleted.", "success")
+    post = models.Post.get(models.Post.id == post_id)
+    if g.user.id == post.user.id:
+        post = models.Post.delete().where(models.Post.id == post_id).execute()
+        flash("This post has successfully been deleted.", "success")
+    else:
+        flash("Cannot delete post.", "success")
     return redirect(url_for('stream', stream=stream))
-
 
 @app.route('/follow/<username>')
 @login_required
