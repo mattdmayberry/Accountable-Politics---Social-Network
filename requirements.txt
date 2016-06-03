@@ -16,7 +16,6 @@ Jinja2==2.8
 Mako==1.0.4
 MarkupSafe==0.23
 peewee==2.8.1
-postgresql==9.5.3
 psycopg2==2.6.1
 pycparser==2.14
 python-dateutil==1.5
