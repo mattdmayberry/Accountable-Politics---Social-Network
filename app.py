@@ -91,6 +91,8 @@ def post():
     form = forms.PostForm()
     if form.validate_on_submit():
         models.Post.create(user=g.user.id,
+                           name=form.name.data.strip(),
+                           url=form.url.data.strip(),
                            content=form.content.data.strip())
         flash("Message posted!", "success")
         return redirect(url_for('index'))

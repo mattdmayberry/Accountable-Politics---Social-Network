@@ -57,7 +57,9 @@ class LoginForm(Form):
 
 
 class PostForm(Form):
-    content = TextAreaField('Create new post', validators=[DataRequired()])
+    name = StringField('Who said this?', validators=[DataRequired()])
+    url = StringField('Provide a link to the claim', validators=[DataRequired()])
+    content = TextAreaField('Provide a summary', validators=[DataRequired()])
 
 class CommentForm(Form):
     content = TextAreaField('Comment on Post', validators=[DataRequired()])
