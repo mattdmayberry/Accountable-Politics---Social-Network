@@ -13,7 +13,7 @@
                     </div>
                 <div class="post_row">
                     <i class="clock"></i><time data-time="{{ post.timestamp }}" class="distime" datetime="{{
-                        post.timestamp.strftime('%Y-%m-%d %H:%M') }}">{{ post.timestamp.strftime('%Y-%m-%d %H:%M') }}</time>
+                        post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}">{{ post.timestamp.strftime('%Y-%m-%d %H:%M') }}</time>
                     <div class="pull-xs-right">
                         <div>
                             <a href="{{ url_for('upvote', post_id=post.id) }}">True</a><p>{{ post.upvotes.count() }}</p>

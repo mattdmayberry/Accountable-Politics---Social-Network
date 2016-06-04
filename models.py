@@ -78,14 +78,13 @@ class Post(Model):
     timestamp = DateTimeField(default=datetime.datetime.now())
     user = ForeignKeyField(
         rel_model=User,
-        related_name='post_user'
+        related_name='posts'
     )
     content = TextField()
 
     class Meta:
         database = db_proxy
         order_by = ('-timestamp',)
-
 
 class Upvote(Model):
     post = ForeignKeyField(
