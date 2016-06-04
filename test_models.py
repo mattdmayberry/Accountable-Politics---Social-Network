@@ -24,7 +24,6 @@ class Test_Models(unittest.TestCase):
             email="test_models_user@example.com",
             password="test_models_user_pw"
             )
-        
         self.user = models.User.get(models.User.username == "test_models_user")
         
         print("User1 created", end='')
@@ -35,7 +34,6 @@ class Test_Models(unittest.TestCase):
             email="test_models_user2@example.com",
             password="test_models_user2_pw"
             )
-        
         self.user2 = models.User.get(models.User.username == "test_models_user2")
 
         print(", User2 created")
@@ -59,19 +57,6 @@ class Test_Models(unittest.TestCase):
                                     models.Relationship.from_user == self.user)
         print("User1 following User2")
         
-        #user upvotes user2's post
-        models.Upvote.create(user = self.user, post = self.post2)
-        models.Upvote.create(user = self.user2, post = self.post2)
-        
-        #user2 downvotes user's post
-        models.Downvote.create(user = self.user2, post = self.post)
-
-        #save upvote instances to self
-        self.upvote_1 = models.Upvote.select().where(models.Upvote.post == self.post.id)
-        self.downvote_1 = models.Downvote.select().where(models.Downvote.post == self.post.id)
-        self.upvote_2 = models.Upvote.select().where(models.Upvote.post == self.post2.id)
-        self.downvote_2 = models.Downvote.select().where(models.Downvote.post == self.post2.id)
-        
 #   TEST CASE TEAR DOWN     #
     @classmethod
     def tearDownClass(self):
@@ -86,15 +71,7 @@ class Test_Models(unittest.TestCase):
         self.post2 = None
         self.relationship.delete_instance()
         self.relationship = None
-        self.upvote_1.delete_instance()
-        self.upvote_1 = None
-        self.downvote_1.delete_instance()
-        self.downvote_1 = None  
-        self.upvote_2.delete_instance()
-        self.upvote_2 = None
-        self.downvote_2.delete_instance()
-        self.downvote_2 = None  
-        
+
 #   USER TABLE TESTS  #
 
     def test_user_created(self):
@@ -184,11 +161,6 @@ class Test_Models(unittest.TestCase):
         self.assertEqual(self.relationship.to_user, self.user2, 
                                                     "incorrect to_user")                                                    
 
-#   UPVOTE TABLE TESTS  #
-    
-    def test_upvote_count_Post_1(self):
-        self.assertEqual(len(self.upvote_1), 0)
-    
 if __name__ == '__main__':
     unittest.main()
 
