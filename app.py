@@ -140,6 +140,9 @@ def delete_post(post_id):
     if g.user.id == post.user.id:
         post = models.Post.delete().where(models.Post.id == post_id).execute()
         flash("This post has successfully been deleted.", "success")
+    elif g.user.is_admin:
+        post = models.Post.delete().where(models.Post.id == post_id).execute()
+        flash("This post has successfully been deleted.", "success")        
     else:
         flash("Cannot delete post.", "success")
     return redirect(url_for('stream', stream=stream))
