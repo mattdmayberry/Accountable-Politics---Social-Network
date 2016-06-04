@@ -4,7 +4,7 @@
 {% for post in stream %}
     <div class="container" style="background-color: #F8F8F8; position: relative; bottom: -25px; border-style: solid; border-color: lightblue;">
         <article>
-            <div class="container" style="style=position: relative; bottom: -20px; padding-bottom: 20px;">
+            <div class="container" style="position: relative; bottom: -20px; padding-bottom: 20px;">
                 <br>
                     <div class="post_row">
                         <h2>
@@ -16,10 +16,10 @@
                         post.timestamp.strftime('%Y-%m-%d %H:%M') }}">{{ post.timestamp.strftime('%Y-%m-%d %H:%M') }}</time>
                     <div class="pull-xs-right">
                         <div>
-                            <a href="{{ url_for('upvote', post_id=post.id) }}">True</a><p>{{ post.upvotes.count() }}</p>
+                            <a href="{{ url_for('upvote', post_id=post.id) }}"><p>{{ post.upvotes.count() }} <img src="/static/img/upvote.png" height="15" width="15" ></p></a>
                         </div>
                         <div>
-                            <a href="{{ url_for('downvote', post_id=post.id) }}">False</a><p>{{ post.downvotes.count() }}</p>
+                            <a href="{{ url_for('downvote', post_id=post.id) }}"><p>{{ post.downvotes.count() }} <img src="/static/img/downvote.png" height="15" width="15" ></p></a>
                         </div>
                     </div>
                 </div>
@@ -28,13 +28,13 @@
                     <div style="width: 85%">
                         {{ post.content }}
                     </div>
-                    <br>
                 </div>
                 <div class="pull-xl-left">
-                    <a href="{{ url_for('view_post', post_id=post.id) }}" class="view" style="padding-right: 10px">View</a>
-                    <a href="{{ url_for('delete_post', post_id=post.id) }}" class="delete" style="padding-right: 10px">Delete</a>
-                    <a href="{{ url_for('stream', post_id=post.id) }}" class="comment" style="padding-right: 10px">Comment</a>
+                    <a href="{{ url_for('view_post', post_id=post.id) }}" class="view" style="padding-right: 10px"><img src="/static/img/ex_link.png" height="15" width="15" ></a>
+                    <a href="{{ url_for('delete_post', post_id=post.id) }}" class="delete" style="padding-right: 10px"><img src="/static/img/trash.png" height="15" width="15" ></a>
+                    <a href="{{ url_for('stream', post_id=post.id) }}" class="comment" style="padding-right: 10px"><img src="/static/img/comment.png" height="15" width="15" ></a>
                 </div>
+                <br>
             </div>
         </article>
     </div>
