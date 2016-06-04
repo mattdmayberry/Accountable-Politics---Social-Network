@@ -187,7 +187,7 @@ class Test_Models(unittest.TestCase):
 #   UPVOTE TABLE TESTS  #
     
     def test_upvote_count_Post_1(self):
-        self.assertEqual(len(self.upvote_1), 2)
+        self.assertEqual(len(self.upvote_1), 0)
     
 if __name__ == '__main__':
     unittest.main()
