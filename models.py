@@ -32,33 +32,33 @@ class User(UserMixin, Model):
         database = db_proxy
         order_by = ('-joined_at',)
 
-    @property
     def get_posts(self):
         return Post.select().where(Post.user == self)
 
-    @property
     def get_stream(self):
         return Post.select().where(
             (Post.user << self.following()) | # get the posts where the post author is inside of the people I follow
             (Post.user == self) # get all of the current users authored posts
         )
 
-    @property
     def following(self):
+        """The users that current user following"""
         return (
-            User
-                .select()
-                .join(Relationship, on=Relationship.to_user)
-                .where(Relationship.from_user == self)
+            User.select().join(
+                Relationship, on=Relationship.to_user
+            ).where(
+                Relationship.from_user == self
+            )
         )
 
-    @property
     def followers(self):
+        """Get users following the current user"""
         return (
-            User
-                .select()
-                .join(Relationship, on=Relationship.from_user)
-                .where(Relationship.to_user == self)
+            User.select().join(
+                Relationship, on=Relationship.from_user
+            ).where(
+                Relationship.to_user == self
+            )
         )
 
     @classmethod
@@ -80,8 +80,6 @@ class Post(Model):
         rel_model=User,
         related_name='posts'
     )
-    name = TextField()
-    url = TextField()
     content = TextField()
 
     class Meta:
