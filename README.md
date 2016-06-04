@@ -1,5 +1,5 @@
 ## Accountable Politics
-[http://sheltered-island-22875.herokuapp.com//](http://sheltered-island-22875.herokuapp.com/)
+[Launch the App](https://salty-lowlands-22107.herokuapp.com/)
 
 ### Setup
 
