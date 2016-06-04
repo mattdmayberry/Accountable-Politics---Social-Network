@@ -8,30 +8,18 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-2">
-            <h5>Posts</h5>
-            <p>{{ user.posts.count() }}</p>
+        <div class="col-xl-4">
+            <h5>{{ user.username }}'s posts</h5>
+            <p class="text-xl-center">{{ user.posts.count() }}</p>
         </div>
-        <div class="col-sm-2">
-            <h5>Followers</h5>
-            <p>{{ user.followers.count }}</p>
-        </div>
-        <div class="col-sm-2">
-            <h5>Following</h5>
-            <p>{{ user.following.count }}</p>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
         <div class="col-sm-2">
         <!-- Follow/unfollow button -->
         {% if current_user.is_authenticated %}
             {% if user != current_user %}
                 {% if not user in current_user.following() %}
-                    <a href="{{ url_for('follow', username=user.username) }}" class="small">Follow</a>
+                    <a href="{{ url_for('follow', username=user.username) }}" class="small" style="color: black;"><img src="/static/img/follow.png" height="25" width="25" >Follow</a>
                 {% else %}
-                    <a href="{{ url_for('unfollow', username=user.username) }}" class="small">Unfollow</a>
+                    <a href="{{ url_for('unfollow', username=user.username) }}" class="small" style="color: black;"><img src="/static/img/unfollow.png" height="25" width="25" >Unfollow</a>
                 {% endif %}
             {% endif %}
         {% endif %}
@@ -41,3 +29,4 @@
 
 {{ super() }} <!-- brings in block content from stream.hmtl-->
 {% endblock %}
+
