@@ -106,20 +106,28 @@ def index():
 @app.route('/stream')
 @app.route('/stream/<username>')
 def stream(username=None):
-    template = 'stream.html'
-    if username and username != current_user.username:
-        try:
-            user = models.User.select().where(
-                models.User.username**username).get()
-        except models.DoesNotExist:
-            abort(404) # if user does not exist send error
-        else:
-            stream = user.posts.limit(100)
+    
+    try:
+        user = current_user.username
+    except:
+        flash("You must be logged in!")
+        return redirect(url_for('login'))
     else:
-        stream = current_user.get_stream().limit(100)
-        user = current_user
-    if username:
-        template = 'user_stream.html'
+        template = 'stream.html'
+        if username and username != current_user.username:
+            try:
+                user = models.User.select().where(
+                    models.User.username**username).get()
+            except models.DoesNotExist:
+                abort(404) # if user does not exist send error
+            else:
+                stream = user.posts.limit(100)
+        else:
+            stream = current_user.get_stream().limit(100)
+            user = current_user
+        if username:
+            template = 'user_stream.html'
+        
     return render_template(template, stream=stream, user=user)
 
 
