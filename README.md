@@ -47,15 +47,57 @@ This installs python3, xcode, and clones the app repository. It also sets up a v
 
 
 ### Running Tests
-Unit tests are provided for each python file. To run the tests on the command line, the format is: 
-
-	python test_app.py
+Unit tests are provided for each python file. To run the tests on the command line, the format is: `python test_models.py`
+Example output from test_models.py:
+	```
+	$ python3 test_models.py
+	Initializing Test Instances...
+	> Creating Users: User1 created, User2 created
+	> Creating Posts: post1 created, post2 created
+	> Creating Relationship: User1 following User2
+	..................Deleting Test Instances
 	
-For more detail on each test that is running add `-v` for verbose output: 
-
-	python test_app.py -v
+	----------------------------------------------------------------------
+	Ran 18 tests in 1.639s
 	
-Ensure that the test_*.py file is in the same directory as the python file to be tested.
+	OK
+	```
+
+For more detail on each test that is running add `-v` for verbose output: `python test_app.py -v`.
+	
+	```
+	$ python3 test_models.py -v
+	Initializing Test Instances...
+	> Creating Users: User1 created, User2 created
+	> Creating Posts: post1 created, post2 created
+	> Creating Relationship: User1 following User2
+	test_post_content (__main__.Test_Models) ... ok
+	test_post_created (__main__.Test_Models) ... ok
+	test_post_timestamp (__main__.Test_Models) ... ok
+	test_relationship_created (__main__.Test_Models) ... ok
+	test_relationship_from_user (__main__.Test_Models) ... ok
+	test_relationship_to_user (__main__.Test_Models) ... ok
+	test_user_attribute_admin (__main__.Test_Models) ... ok
+	test_user_attribute_email (__main__.Test_Models) ... ok
+	test_user_attribute_joined_at (__main__.Test_Models) ... ok
+	test_user_attribute_password (__main__.Test_Models) ... ok
+	test_user_attribute_username (__main__.Test_Models) ... ok
+	test_user_created (__main__.Test_Models) ... ok
+	test_user_duplicate_email (__main__.Test_Models) ... ok
+	test_user_duplicate_username (__main__.Test_Models) ... ok
+	test_user_followers (__main__.Test_Models) ... ok
+	test_user_following (__main__.Test_Models) ... ok
+	test_user_get_posts (__main__.Test_Models) ... ok
+	test_user_get_stream (__main__.Test_Models) ... ok
+	Deleting Test Instances
+	
+	----------------------------------------------------------------------
+	Ran 18 tests in 1.594s
+	
+	OK
+	```
+	
+**Ensure that the test_*.py file is in the same directory as the python file to be tested.**
 
 ### Running Locally
 
