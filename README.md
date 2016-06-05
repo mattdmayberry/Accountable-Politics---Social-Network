@@ -47,7 +47,7 @@ This installs python3, xcode, and clones the app repository. It also sets up a v
 
 
 ### Running Tests
-Unit tests are provided for each python file. To run the tests on the command line, the format is: `python test_models.py`
+There are three unit tests are provided for each python file: test_app.py, test_models.py, and test_forms.py. To run the tests on the command line, the format is: `python test_models.py`
 Example output from test_models.py:
 
 	```
@@ -98,7 +98,7 @@ For more detail on each test that is running add `-v` for verbose output: `pytho
 	OK
 	```
 	
-**Ensure that the test_*.py file is in the same directory as the python file to be tested.**
+Ensure that the test_*.py file is in the same directory as the corresponding python file to be tested.
 
 ### Running Locally
 
