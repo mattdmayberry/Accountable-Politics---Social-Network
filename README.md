@@ -51,7 +51,7 @@ Unit tests are provided for each python file. To run the tests on the command li
 
 	`python test_app.py`
 	
-For more detail on each test that is running add "-v" for verbose output: 
+For more detail on each test that is running add `-v` for verbose output: 
 
 	`python test_app.py -v`
 	
@@ -67,7 +67,7 @@ This will run the project on [port 5000](http://localhost:5000/).
 
 [PyCharm](https://www.jetbrains.com/pycharm/) is an IDE from Jetbrains for python. It can be installed by running `brew cask install pycharm`.
 
-Open pycharm, input a license, and select to install the command line tool. Then, open the project in pycharm by running `charm` . from the project directory. Wait for pycharm to load it, and then you're good to go! Jetbrains offers [free licences](https://www.jetbrains.com/student/) to students for all of their products.
+Open pycharm, input a license, and select to install the command line tool. Then, open the project in pycharm by running `charm` . from the project directory. Wait for pycharm to load it, and then you're good to go! Jetbrains offers [free licences](https://www.jetbrains.com/student/) to all of their products for academic users.
 
 
 ### Using Git
