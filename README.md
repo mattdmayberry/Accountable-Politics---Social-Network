@@ -1,5 +1,5 @@
 ## Accountable Politics
-[http://sheltered-island-22875.herokuapp.com//](http://sheltered-island-22875.herokuapp.com/)
+[http://accountable-politics.herokuapp.com/](http://accountable-politics.herokuapp.com/)
 
 ### Setup
 
@@ -33,7 +33,7 @@ This installs python3, xcode, and clones the app repository. It also sets up a v
     Mako==1.0.4
     MarkupSafe==0.23
     peewee==2.8.1
-    postgresql==9.5.3
+    postgresql==9.5.3 // Not included in Requirements.txt but may be needed for Windows OS users
     psycopg2==2.6.1
     pycparser==2.14
     python-dateutil==1.5
@@ -47,7 +47,58 @@ This installs python3, xcode, and clones the app repository. It also sets up a v
 
 
 ### Running Tests
-!! NEED TO UPDATE THIS SECTION WITH TESTING INFO !!
+There are three unit test files provided in the project directory: test_app.py, test_models.py, and test_forms.py. To run the tests on the command line, the format is: `python test_models.py`
+Example output from test_models.py:
+
+	```
+	$ python3 test_models.py
+	Initializing Test Instances...
+	> Creating Users: User1 created, User2 created
+	> Creating Posts: post1 created, post2 created
+	> Creating Relationship: User1 following User2
+	..................Deleting Test Instances
+	
+	----------------------------------------------------------------------
+	Ran 18 tests in 1.639s
+	
+	OK
+	```
+
+For more detail on each test that is running add `-v` for verbose output: `python test_app.py -v`.
+	
+	```
+	$ python3 test_models.py -v
+	Initializing Test Instances...
+	> Creating Users: User1 created, User2 created
+	> Creating Posts: post1 created, post2 created
+	> Creating Relationship: User1 following User2
+	test_post_content (__main__.Test_Models) ... ok
+	test_post_created (__main__.Test_Models) ... ok
+	test_post_timestamp (__main__.Test_Models) ... ok
+	test_relationship_created (__main__.Test_Models) ... ok
+	test_relationship_from_user (__main__.Test_Models) ... ok
+	test_relationship_to_user (__main__.Test_Models) ... ok
+	test_user_attribute_admin (__main__.Test_Models) ... ok
+	test_user_attribute_email (__main__.Test_Models) ... ok
+	test_user_attribute_joined_at (__main__.Test_Models) ... ok
+	test_user_attribute_password (__main__.Test_Models) ... ok
+	test_user_attribute_username (__main__.Test_Models) ... ok
+	test_user_created (__main__.Test_Models) ... ok
+	test_user_duplicate_email (__main__.Test_Models) ... ok
+	test_user_duplicate_username (__main__.Test_Models) ... ok
+	test_user_followers (__main__.Test_Models) ... ok
+	test_user_following (__main__.Test_Models) ... ok
+	test_user_get_posts (__main__.Test_Models) ... ok
+	test_user_get_stream (__main__.Test_Models) ... ok
+	Deleting Test Instances
+	
+	----------------------------------------------------------------------
+	Ran 18 tests in 1.594s
+	
+	OK
+	```
+	
+Ensure that the test_*.py file is in the same directory as the corresponding python file to be tested.
 
 ### Running Locally
 
@@ -59,9 +110,9 @@ This will run the project on [port 5000](http://localhost:5000/).
 
 [PyCharm](https://www.jetbrains.com/pycharm/) is an IDE from Jetbrains for python. It can be installed by running `brew cask install pycharm`.
 
-Open pycharm, input a license, and select to install the command line tool. Then, open the project in pycharm by running `charm` . from the project directory. Wait for pycharm to load it, and then you're good to go! Jetbrains offers [free licences](https://www.jetbrains.com/student/) to students for all of their products.
+Open pycharm, input a license, and select to install the command line tool. Then, open the project in pycharm by running `charm` . from the project directory. Wait for pycharm to load it, and then you're good to go! Jetbrains offers [free licences](https://www.jetbrains.com/student/) to all of their products for academic users.
 
 
 ### Using Git
 
-See [Github's documentation](https://help.github.com/). The project team prefers to commit directly to master, with small-ish commits. that always have passing tests.
+See [Github's documentation](https://help.github.com/). The project team prefers to commit directly to master, with small-ish commits. that always have passing tests. 
