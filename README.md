@@ -47,7 +47,7 @@ This installs python3, xcode, and clones the app repository. It also sets up a v
 
 
 ### Running Tests
-There are three unit tests provided in the project directory: test_app.py, test_models.py, and test_forms.py. To run the tests on the command line, the format is: `python test_models.py`
+There are three unit test files provided in the project directory: test_app.py, test_models.py, and test_forms.py. To run the tests on the command line, the format is: `python test_models.py`
 Example output from test_models.py:
 
 	```
