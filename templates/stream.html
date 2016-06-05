@@ -4,6 +4,13 @@
 {% for post in stream %}
     <div class="container" style="background-color: #F8F8F8; position: relative; bottom: -25px; border-style: solid; border-color: lightblue;">
         <article>
+            <div class="pull-xs-right">
+                <br>
+                <br>
+                <h4 style=color:#0275d8;">Vote</h4>
+                <a href="{{ url_for('upvote', post_id=post.id) }}"><p>{{ post.upvotes.count() }} <img src="/static/img/upvote.png" height="15" width="15" ></p></a>
+                <a href="{{ url_for('downvote', post_id=post.id) }}"><p>{{ post.downvotes.count() }} <img src="/static/img/downvote.png" height="15" width="15" ></p></a>
+            </div>
             <div class="container" style="position: relative; bottom: -20px; padding-bottom: 20px;">
                 <br>
                     <div class="post_row">
@@ -14,14 +21,7 @@
                 <div class="post_row">
                     <i class="clock"></i><time data-time="{{ post.timestamp }}" class="distime" datetime="{{
                         post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}">{{ post.timestamp.strftime('%Y-%m-%d %H:%M') }}</time>
-                    <div class="pull-xs-right">
-                        <div>
-                            <a href="{{ url_for('upvote', post_id=post.id) }}"><p>{{ post.upvotes.count() }} <img src="/static/img/upvote.png" height="15" width="15" ></p></a>
-                        </div>
-                        <div>
-                            <a href="{{ url_for('downvote', post_id=post.id) }}"><p>{{ post.downvotes.count() }} <img src="/static/img/downvote.png" height="15" width="15" ></p></a>
-                        </div>
-                    </div>
+
                 </div>
 
                 <div class="post_row">
