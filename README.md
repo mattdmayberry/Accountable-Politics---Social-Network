@@ -1,5 +1,5 @@
 ## Accountable Politics
-[http://sheltered-island-22875.herokuapp.com//](http://sheltered-island-22875.herokuapp.com/)
+[http://accountable-politics.herokuapp.com/](http://accountable-politics.herokuapp.com/)
 
 ### Setup
 
@@ -33,7 +33,7 @@ This installs python3, xcode, and clones the app repository. It also sets up a v
     Mako==1.0.4
     MarkupSafe==0.23
     peewee==2.8.1
-    postgresql==9.5.3
+    postgresql==9.5.3 // Not included in Requirements.txt but may be needed for Windows OS users
     psycopg2==2.6.1
     pycparser==2.14
     python-dateutil==1.5
@@ -64,4 +64,4 @@ Open pycharm, input a license, and select to install the command line tool. Then
 
 ### Using Git
 
-See [Github's documentation](https://help.github.com/). The project team prefers to commit directly to master, with small-ish commits. that always have passing tests.
+See [Github's documentation](https://help.github.com/). The project team prefers to commit directly to master, with small-ish commits. that always have passing tests. 
