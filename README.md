@@ -1,5 +1,4 @@
 ## Accountable Politics
-[http://accountable-politics.herokuapp.com/](http://accountable-politics.herokuapp.com/)
 
 ### Setup
 
