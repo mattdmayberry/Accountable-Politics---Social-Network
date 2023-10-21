@@ -1,5 +1,7 @@
 ## Accountable Politics
 
+Accountable Politics is a social media app designed to combat the spread of false political information on social platforms. Conceived during the 2016 election campaign due to the prevalence of misleading political claims, the app remains in prototype mode, offering users the opportunity to fact-check and verify posts, and is open for cloning and further development by the community.
+
 ### Setup
 
 This assumes you're running OSX and already have [Homebrew](http://brew.sh/) installed as well as an [ssh key added to your github account](https://help.github.com/articles/generating-an-ssh-key/).
